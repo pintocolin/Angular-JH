@@ -1,0 +1,11 @@
+{
+  "name": "angular1-code",
+  "version": "1.0.0",
+  "description": "philly.net intro lab",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "author": "Bill Wolff",
+  "license": "ISC"
+}
