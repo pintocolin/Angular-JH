@@ -1,11 +1,11 @@
 {
-  "name": "angular1-code",
+  "name": "angular1",
   "version": "1.0.0",
-  "description": "philly.net intro lab",
+  "description": "Couserea John Hopkins Angular 1 course ",
   "main": "index.js",
   "scripts": {
     "start": "live-server"
   },
-  "author": "Bill Wolff",
+  "author": "Coin Pinto",
   "license": "ISC"
 }
