@@ -1,0 +1,20 @@
+body {
+    background-color: lightblue;
+}
+h1 {
+    color: palevioletred;
+}
+.alpha{
+    color: lightgoldenrodyellow;
+    padding: 20px;
+}
+.beta {
+    color: lightseagreen;
+    margin: 3%;
+    padding: 20px;
+    background-color: grey;
+}
+#col1,#col2,#col3{
+    margin: 10px;
+    background-color: blueviolet;
+}
