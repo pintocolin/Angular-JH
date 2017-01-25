@@ -1,0 +1,11 @@
+{
+  "name": "angular1",
+  "version": "1.0.0",
+  "description": "\"angular1 demo\"",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server"
+  },
+  "author": "colin Pinto",
+  "license": "ISC"
+}
