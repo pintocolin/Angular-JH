@@ -1,0 +1,23 @@
+Project notes
+
+launch the Browser sync
+
+1. Go to the project folder, select and right click and choose VSCode. This will launch VSC
+2. in VSC type ctl ` to launch the terminal
+3. Start browser sync usingng the cmd below
+
+		Browser-sync start --server -directory --files “**/*”
+4. This will launch a chrome browser tab with the index.html
+
+
+==
+FAQ
+https://github.com/jhu-ep-coursera/fullstack-course5/blob/master/FAQ.md#how-to-ask-and-get-your-question-answered-a-must-read
+
+===
+
+
+
+
+
+
