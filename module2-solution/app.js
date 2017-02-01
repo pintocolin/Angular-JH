@@ -33,7 +33,7 @@ function ShoppingListCheckOffService(){
         {name:'bucket of chicken wings', quantity:3},
         {name:'bags of pretrels', quantity:4},
         {name:'bags of chips', quantity:5},
-        {name:'corn chips', quantity:6},
+        {name:'bags cheese curls', quantity:6},
         {name:'cases of coke', quantity:4},
         ];
         // List of Bought itms
