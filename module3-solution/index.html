@@ -8,11 +8,11 @@
     <script src="scripts/angular.min.js"> </script>
     <script src="app.js"></script>
   </head>
-<body>
+<body ng-app="NarrowItDownApp">
    <div class="container">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-    <div class="form-group">
+    <div class="form-group" ng-controller="NarrowItDownController">
       <input type="text" placeholder="search term" class="form-control">
     </div>
     <div class="form-group narrow-button">
