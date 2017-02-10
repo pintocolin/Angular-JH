@@ -14,9 +14,17 @@ function NarrowItDownController(MenuSearchService){
     var searchTerm = "chicken";
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
 
-
+    console.log(menu.items);
     promise.then(function (response) {
-      console.log(response.data);
+      if(1){
+        menu.items = response.data;
+        console.log(menu.items);
+      }
+      else{
+        menu.error = "Nothing found";
+        console.log(menu.error);
+      }
+
     })
     .catch(function (error) {
       console.log(error);
@@ -42,7 +50,7 @@ function MenuSearchService($http, ApiBasePath){
   };
     
 }
-function  () {
+function FoundItemsDirective() {
   var ddo = {
     templateUrl: 'foundItemsTemplate.html',
     restrict: 'E',
@@ -50,7 +58,7 @@ function  () {
       items: '<foundItems',
       onRemove: '&'
     },
-    controller: FoundItemsDirectiveController,
+    controller: FoundItemsController,
     controllerAs: 'list',
     bindToController: true
   };
@@ -58,4 +66,13 @@ function  () {
   return ddo;
 }
 
+function FoundItemsController( ){
+  var list = this;
+
+  list.items = nlist.items;
+  list.onRemove = function (){
+    // remove the item from the list 
+  }
+}
+//end 
 })()  

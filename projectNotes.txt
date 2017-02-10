@@ -15,9 +15,8 @@ FAQ
 https://github.com/jhu-ep-coursera/fullstack-course5/blob/master/FAQ.md#how-to-ask-and-get-your-question-answered-a-must-read
 
 ===
-
-
-
-
+**dependency injections are protected from minification**
+So the lessons learned from that is that dependency injection in angular used to be minification proof. And the way to do this is a couple of methods. Number one is we can have an inline array with function as the last element in the array that works. But a more elegant way is to attach a $inject property to the function object that is being injected into. And Angular will look for that $inject property, and we'll use that $inject property, or I should say the value with it, should be that same array we spoke about, minus the last element as the function, just the array of the names of the arguments. It will use that as a guide to know where to inject which service. 
+===
 
 
