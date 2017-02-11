@@ -1,6 +1,14 @@
 h1 {
   margin-bottom: 30px;
 }
+.error {
+  margin-left:10px;
+  padding-left: 0px;
+  text-align: left;
+  color: red;
+  text-decoration: underline;
+
+}
 input[type="text"] {
   width: 200px;
   float: left;

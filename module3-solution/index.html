@@ -9,20 +9,23 @@
     <script src="app.js"></script>
   </head>
 <body ng-app="NarrowItDownApp">
-   <div class="container" ng-controller="NarrowItDownController as list">
+   <div class="container" ng-controller="NarrowItDownController as mlist">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group" >
-      <input type="text" placeholder="search term" class="form-control" ng-model="list.searchTerm">
+      <input type="text" placeholder="search term" class="form-control" ng-model="mlist.searchTerm">
     </div>
     <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="list.narrowItDown()">Narrow It Down For Me!</button>
+      <button class="btn btn-primary" ng-click="mlist.narrowItDown()">Narrow It Down For Me!</button>
     </div>
-
+    <br /> <br />
+    <div class="error" ng-if="mlist.showError[0]"> 
+      <p>Nothing Found </p>
+    </div> 
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="list.items" on-remove='list.onRemove()' ></found-items>
+    <found-items found-items="mlist.items" on-remove='mlist.onRemove()' show-error ='mlist.showError' ></found-items>
     
   </div>
 
-</body>
+</body>  
 </html>

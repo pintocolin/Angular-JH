@@ -13,11 +13,16 @@ function NarrowItDownController(MenuSearchService){
 
     menu.found = [];
     menu.searchTerm = "";
-    menu.showError = false;
-    menu.items = [];
+    menu.showError = [false,];
 
     menu.narrowItDown = function(){
-      console.log("Narrow it down button was clicked: " + menu.searchTerm );
+      menu.items = [];
+      var searchTerm = menu.searchTerm.toLowerCase();
+      if(searchTerm == "") {
+        menu.showError[0] = true;
+        return;
+      }
+      console.log("Narrow it down button was clicked: " + searchTerm );
 
       var allItmePromise = MenuSearchService.getMatchedMenuItems();
         allItmePromise.then(function(allItems){
@@ -26,14 +31,25 @@ function NarrowItDownController(MenuSearchService){
 
         console.log(menu.AllItems);
         for (var i = 0; i < menu.AllItems.length; i++) {
-          if (menu.AllItems[i].description.toLowerCase().indexOf(menu.searchTerm) !== -1) {
+          if((menu.AllItems[i].description.toLowerCase().indexOf(searchTerm) !== -1) ||
+              (menu.AllItems[i].name.toLowerCase().indexOf(searchTerm) !== -1))
+          {
             menu.items.push(menu.AllItems[i]);
           }
+          if(menu.items.length === 0)
+            menu.showError[0] = true;
+          else
+            menu.showError[0] = false;
         }
                 console.log(menu.items);
       })
     }
 
+//remove button click  
+menu.removeItem = function (index) {
+  console.log("main controller ");
+    menu.items.splice(index, 1);
+  };
 //    var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
 
  //   promise.then(function (response) {
@@ -46,7 +62,7 @@ function NarrowItDownController(MenuSearchService){
   //   })
     //menu.found = MenuSearchService.getMatchedMenueItems(menu.searchTerm );
 }   
-//SErvice 
+//Service 
 MenuSearchService.$injector = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath){
     var service = this;
@@ -85,7 +101,8 @@ function FoundItemsDirective() {
     restrict: 'E',
     scope: {
       items: '<foundItems',
-      onRemove: '&'
+      onRemove: '&',
+      showError: '<'
     },
     controller: FoundItemsController,
     controllerAs: 'list',
@@ -102,9 +119,14 @@ function FoundItemsController(){
 
   console.log("in the FoundItemController funciton : ");
 
-  myCtrl.onRemove = function (){
+  myCtrl.onRemove = function (rIndex, mlist, sError){
     // remove the item from the list 
-    console.log("Button click handler onRemove");
+    console.log("Button click handler onRemove: " + rIndex);
+    console.log(mlist);
+    mlist.splice(rIndex, 1);
+    if(mlist.length === 0){
+        sError[0] = true;
+    }
   }
 }
 //end 
