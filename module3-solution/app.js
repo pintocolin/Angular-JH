@@ -11,45 +11,67 @@ NarrowItDownController.$injector =["MenuSearchService"];
 function NarrowItDownController(MenuSearchService){
     var menu= this;
 
-    var searchTerm = "chicken";
-    var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
+    menu.found = [];
+    menu.searchTerm = "";
+    menu.showError = false;
 
-    console.log(menu.items);
-    promise.then(function (response) {
-      if(1){
-        menu.items = response.data;
+    menu.narrowItDown = function(){
+      console.log("Narrow it down button was clicked" + menu.searchTerm );
+
+      var allItmePromise = MenuSearchService.getMatchedMenuItems();
+        allItmePromise.then(function(allItems){
+                console.log("button promise");
+        menu.items = allItems.data.menu_items;
         console.log(menu.items);
-      }
-      else{
-        menu.error = "Nothing found";
-        console.log(menu.error);
-      }
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      })
+    }
 
+//    var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
 
+ //   promise.then(function (response) {
+
+ //      console.log(response.data);
+
+ //   })
+ //   .catch(function (error) {
+ //     console.log(error);
+  //   })
+    //menu.found = MenuSearchService.getMatchedMenueItems(menu.searchTerm );
 }   
-
+//SErvice 
 MenuSearchService.$injector = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath){
     var service = this;
 
-  service.getMatchedMenuItems = function (searchTerm) {
+    service.getMatchedMenuItems = function () {
     var response = $http({
       method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-      params: {
-        //category: shortName
-      }
+      url: (ApiBasePath + "/menu_items.json")
     });
 
     return response;
   };
-    
+
+   service.getMatchedMenueItems = function(searchTerm) {
+    var allMenuItemsPromise = service.getMatchedMenuItems(searchTerm);
+
+    allMenuItemsPromise
+      .then(function(response){
+          console.log(response.data);
+          var allItems = response.data.menu_items;
+          return allItems;
+          //return allItems.filter(function(searchTerm) {
+            //return allItems.description.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1;
+          //})
+      })
+      .catch(function(error){
+          console.log("error getting data from server");
+      })
+   }
 }
+
+// directive
 function FoundItemsDirective() {
   var ddo = {
     templateUrl: 'foundItemsTemplate.html',
@@ -62,16 +84,20 @@ function FoundItemsDirective() {
     controllerAs: 'list',
     bindToController: true
   };
+  console.log("In the FoundItemDirective function" );
 
   return ddo;
 }
 
-function FoundItemsController( ){
-  var list = this;
+FoundItemsController.$injector =[];
+function FoundItemsController(){
+  var myCtrl = this;
 
-  list.items = nlist.items;
-  list.onRemove = function (){
+  console.log("in the FoundItemController funciton : ");
+
+  myCtrl.onRemove = function (){
     // remove the item from the list 
+    console.log("Button click handler onRemove");
   }
 }
 //end 
