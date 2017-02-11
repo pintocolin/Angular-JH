@@ -14,16 +14,23 @@ function NarrowItDownController(MenuSearchService){
     menu.found = [];
     menu.searchTerm = "";
     menu.showError = false;
+    menu.items = [];
 
     menu.narrowItDown = function(){
-      console.log("Narrow it down button was clicked" + menu.searchTerm );
+      console.log("Narrow it down button was clicked: " + menu.searchTerm );
 
       var allItmePromise = MenuSearchService.getMatchedMenuItems();
         allItmePromise.then(function(allItems){
                 console.log("button promise");
-        menu.items = allItems.data.menu_items;
-        console.log(menu.items);
+        menu.AllItems = allItems.data.menu_items;
 
+        console.log(menu.AllItems);
+        for (var i = 0; i < menu.AllItems.length; i++) {
+          if (menu.AllItems[i].description.toLowerCase().indexOf(menu.searchTerm) !== -1) {
+            menu.items.push(menu.AllItems[i]);
+          }
+        }
+                console.log(menu.items);
       })
     }
 
